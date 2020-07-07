@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2019",
+      "outDir": "dist",
+      "rootDir": ".",
+      "baseUrl": ".",
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true,
+      "noFallthroughCasesInSwitch": true,
+      "resolveJsonModule": true,
+      "strict": true
+  },
+  "exclude": ["sandbox/**/*.ts", "tmp/**/*.ts"]
+}
