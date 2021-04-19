@@ -38,9 +38,6 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
     includeRootFolder: false
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-
 - task: AzureFunctionApp@1
   inputs:
     azureSubscription: 'anmanca internal subscription (43c4fce3-91d3-4498-9282-275f49cdd065)-1639'
