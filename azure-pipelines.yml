@@ -1,0 +1,45 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'npm install and build'
+
+- task: Npm@1
+  displayName: Run 'build' script
+  inputs:
+    command: custom
+    workingDir: $(System.DefaultWorkingDirectory)
+    verbose: false
+    customCommand: run build --if-present
+
+- task: ArchiveFiles@2
+  displayName: Archive files
+  inputs:
+    rootFolderOrFile: $(System.DefaultWorkingDirectory)
+    includeRootFolder: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
+- task: AzureFunctionApp@1
+  inputs:
+    azureSubscription: 'anmanca internal subscription (43c4fce3-91d3-4498-9282-275f49cdd065)-1639'
+    appType: 'functionApp'
+    appName: 'amancaTSTest'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
