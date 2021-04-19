@@ -35,7 +35,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    rootFolderOrFile: $(System.DefaultWorkingDirectory)
     includeRootFolder: false
 
 - task: AzureFunctionApp@1
@@ -43,5 +43,5 @@ steps:
     azureSubscription: 'anmanca internal subscription (43c4fce3-91d3-4498-9282-275f49cdd065)-1639'
     appType: 'functionApp'
     appName: 'amancaTSTest'
-    package: $(System.DefaultWorkingDirectory)/**/*.zip
+    package: $(System.DefaultWorkingDirectory)/*.zip
     deploymentMethod: 'auto'
